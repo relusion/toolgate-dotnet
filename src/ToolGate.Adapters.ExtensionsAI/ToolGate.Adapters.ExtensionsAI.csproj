@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace>ToolGate.Adapters.ExtensionsAI</RootNamespace>
+    <AssemblyName>ToolGate.Adapters.ExtensionsAI</AssemblyName>
+    <PackageId>ToolGate.Adapters.ExtensionsAI</PackageId>
+    <Description>Microsoft.Extensions.AI adapter for ToolGate — DelegatingChatClient that evaluates tool calls against policies.</Description>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ToolGate.Core\ToolGate.Core.csproj" />
+    <ProjectReference Include="..\ToolGate.Policies\ToolGate.Policies.csproj" />
+    <ProjectReference Include="..\ToolGate.Approvals\ToolGate.Approvals.csproj" />
+    <PackageReference Include="Microsoft.Extensions.AI" />
+    <PackageReference Include="Microsoft.Extensions.AI.Abstractions" />
+  </ItemGroup>
+</Project>

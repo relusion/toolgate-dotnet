@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace>ToolGate.Policies</RootNamespace>
+    <AssemblyName>ToolGate.Policies</AssemblyName>
+    <PackageId>ToolGate.Policies</PackageId>
+    <Description>Built-in denylist, allowlist, and high-risk approval policies for ToolGate.</Description>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ToolGate.Core\ToolGate.Core.csproj" />
+  </ItemGroup>
+</Project>

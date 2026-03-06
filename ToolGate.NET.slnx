@@ -1,0 +1,22 @@
+<Solution>
+  <Folder Name="/benchmarks/">
+    <Project Path="benchmarks/ToolGate.Benchmarks/ToolGate.Benchmarks.csproj" />
+  </Folder>
+  <Folder Name="/samples/">
+    <Project Path="samples/ToolGate.Samples.ConsoleChat/ToolGate.Samples.ConsoleChat.csproj" />
+    <Project Path="samples/ToolGate.Samples.AzureChat/ToolGate.Samples.AzureChat.csproj" />
+    <Project Path="samples/ToolGate.Samples.ExpenseAgent/ToolGate.Samples.ExpenseAgent.csproj" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/ToolGate.Adapters.ExtensionsAI/ToolGate.Adapters.ExtensionsAI.csproj" />
+    <Project Path="src/ToolGate.Approvals/ToolGate.Approvals.csproj" />
+    <Project Path="src/ToolGate.Core/ToolGate.Core.csproj" />
+    <Project Path="src/ToolGate.Policies/ToolGate.Policies.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/ToolGate.Adapters.ExtensionsAI.Tests/ToolGate.Adapters.ExtensionsAI.Tests.csproj" />
+    <Project Path="tests/ToolGate.Approvals.Tests/ToolGate.Approvals.Tests.csproj" />
+    <Project Path="tests/ToolGate.Core.Tests/ToolGate.Core.Tests.csproj" />
+    <Project Path="tests/ToolGate.Policies.Tests/ToolGate.Policies.Tests.csproj" />
+  </Folder>
+</Solution>

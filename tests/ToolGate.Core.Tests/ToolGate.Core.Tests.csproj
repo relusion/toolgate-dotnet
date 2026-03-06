@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace>ToolGate.Core.Tests</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\ToolGate.Core\ToolGate.Core.csproj" />
+    <ProjectReference Include="..\..\src\ToolGate.Policies\ToolGate.Policies.csproj" />
+    <ProjectReference Include="..\..\src\ToolGate.Approvals\ToolGate.Approvals.csproj" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
+    <PackageReference Include="Microsoft.Extensions.Logging" />
+  </ItemGroup>
+</Project>

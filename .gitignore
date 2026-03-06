@@ -1,0 +1,31 @@
+## .NET
+bin/
+obj/
+*.user
+*.suo
+*.sln.docstates
+*.nupkg
+*.snupkg
+
+## IDE
+.vs/
+.idea/
+*.swp
+*~
+
+## Build
+artifacts/
+TestResults/
+BenchmarkDotNet.Artifacts/
+coverage/
+
+## OS
+.DS_Store
+Thumbs.db
+
+## Claude Code
+.claude/
+
+## Internal docs
+specs.md
+samples/docs/

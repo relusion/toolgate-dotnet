@@ -1,0 +1,104 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        framework: [net8.0, net9.0]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            8.0.x
+            9.0.x
+
+      - name: Restore
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --no-restore -c Release
+
+      - name: Test (${{ matrix.framework }})
+        run: >
+          dotnet test --no-build -c Release
+          --framework ${{ matrix.framework }}
+          --collect:"XPlat Code Coverage"
+          --results-directory ./coverage
+          --logger "trx;LogFileName=results-${{ matrix.framework }}.trx"
+
+      - name: Upload coverage
+        if: matrix.framework == 'net8.0'
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage/**/coverage.cobertura.xml
+
+  coverage-gate:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Install ReportGenerator
+        run: dotnet tool install -g dotnet-reportgenerator-globaltool
+
+      - name: Download coverage
+        uses: actions/download-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage
+
+      - name: Generate report and check threshold
+        run: |
+          reportgenerator \
+            "-reports:coverage/**/coverage.cobertura.xml" \
+            "-targetdir:coverage/report" \
+            "-reporttypes:TextSummary"
+          cat coverage/report/Summary.txt
+          # Extract line coverage and check >= 80%
+          LINE_COV=$(grep "Line coverage" coverage/report/Summary.txt | grep -oP '[\d.]+(?=%)' | head -1)
+          echo "Line coverage: ${LINE_COV}%"
+          if (( $(echo "$LINE_COV < 80" | bc -l) )); then
+            echo "::error::Coverage ${LINE_COV}% is below the 80% threshold"
+            exit 1
+          fi
+
+  pack:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Pack
+        run: dotnet pack -c Release --output ./artifacts
+
+      - name: Upload packages
+        uses: actions/upload-artifact@v4
+        with:
+          name: nuget-packages
+          path: ./artifacts/*.nupkg

@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace>ToolGate.Approvals</RootNamespace>
+    <AssemblyName>ToolGate.Approvals</AssemblyName>
+    <PackageId>ToolGate.Approvals</PackageId>
+    <Description>In-memory approval store and human-in-the-loop approval workflow for ToolGate.</Description>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="ToolGate.Approvals.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ToolGate.Core\ToolGate.Core.csproj" />
+  </ItemGroup>
+</Project>
