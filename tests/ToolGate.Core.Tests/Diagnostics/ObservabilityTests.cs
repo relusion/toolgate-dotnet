@@ -109,7 +109,11 @@ public class ObservabilityTests : IDisposable
         ActivitySource.AddActivityListener(listener);
 
         Activity? captured = null;
-        listener.ActivityStopped = activity => captured = activity;
+        listener.ActivityStopped = activity =>
+        {
+            if (activity.GetTagItem("toolgate.tool_name") is "test_tool")
+                captured = activity;
+        };
 
         using var sp = BuildProvider();
         var gate = sp.GetRequiredService<IToolGate>();
